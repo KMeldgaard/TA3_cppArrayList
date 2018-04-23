@@ -71,6 +71,37 @@ int main()
     std::cout << "\b\b" << std::endl << std::endl;
 
     //Copy constructor & copy assignment
+    ArrayList<double> array2 = array;
+    ArrayList<double> subArray2;
+    subArray2 = subArray;
+
+    std::cout << "array2 = ";
+    for (int i = 0; i < array2.size(); i++) {
+        std::cout << array2[i] << ", ";
+    }
+    std::cout << "\b\b  " << std::endl << std::endl;
+
+    std::cout << "subArray2 = ";
+    for (int i = 0; i < subArray2.size(); ++i) {
+        std::cout << subArray2[i] << ", ";
+    }
+    std::cout << "\b\b  " << std::endl << std::endl;
+
+    //Move assignment operator
+    ArrayList<double> subArray3 = std::move(subArray2);
+    array2 = std::move(subArray2);
+
+    std::cout << "subArray2 = ";
+    for (int i = 0; i < subArray2.size(); ++i) {
+        std::cout << subArray2[i] << ", ";
+    }
+    std::cout << "\b\b  " << std::endl << std::endl;
+
+    std::cout << "subArray3 = ";
+    for (int i = 0; i < subArray3.size(); ++i) {
+        std::cout << subArray3[i] << ", ";
+    }
+    std::cout << "\b\b  " << std::endl << std::endl;
 
     return 0;
 }

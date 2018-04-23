@@ -295,8 +295,8 @@ void ArrayList<T>::extendStorage()
         _elems[i] = temp[i]; //copy values from elems to new array
     }
     _reserved *= 2;
-    delete [] _elems; //delete data at _elems
     _elems = temp; //point _elems at new array
+    delete temp;
 }
 
 #endif // ARRAYLIST_H

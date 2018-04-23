@@ -58,7 +58,7 @@ public:
     /*
      * Get a reference to the element at idx
      */
-    T&operator [](int idx);
+    T& operator [](int idx);
 
     /*
      * Removes the element at placement "idx" by moving all the remaining elements
@@ -154,13 +154,28 @@ ArrayList<T>::~ArrayList()
 template<class T>
 ArrayList<T>::operator=(const ArrayList<T>& a)
 {
-
+    if (this != a) {
+        delete [] _elems;
+        _elems = new T[a._size];
+        for (int i = 0; i < a._elems; i++)
+            _elems[i] = a._elems[i];
+        _size = a._size;
+    }
+    return *this;
 }
 
 template<class T>
-ArrayList<T>::operator =(ArrayList<T>&& a)
+ArrayList<T>::operator=(ArrayList<T>&& a)
 {
+    if (this != &a) {
+        delete [] _elems;
+        _elems = a._elems;
+        _size = a._size;
 
+        a._elems = nullptr;
+        a._size = 0;
+    }
+    return *this;
 }
 
 template<class T>
@@ -170,15 +185,15 @@ ArrayList<T>::add(int idx, const T &element)
 }
 
 template<class T>
-ArrayList<T>::operator [](int idx) const
+T& ArrayList<T>::operator [](int idx) const
 {
-
+    return _elems[idx];
 }
 
 template<class T>
-ArrayList<T>::operator [](int idx)
+T& ArrayList<T>::operator [](int idx)
 {
-
+    return _elems[idx];
 }
 
 template<class T>

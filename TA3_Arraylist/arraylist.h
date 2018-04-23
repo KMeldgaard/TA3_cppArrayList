@@ -190,13 +190,13 @@ ArrayList<T>::remove(int idx)
 template<class T>
 ArrayList<T>::size()
 {
-
+    return _size;
 }
 
 template<class T>
 ArrayList<T>::reserved()
 {
-
+    return _reserved;
 }
 
 template<class T>
@@ -225,6 +225,12 @@ ArrayList<T>::subArrayList(int fromIdx, int toIdx) const
 
 template<class T>
 ArrayList<T>::toArray()
+{
+
+}
+
+template<class T>
+ArrayList<T>::extendStorage()
 {
 
 }

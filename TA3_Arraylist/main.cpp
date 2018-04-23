@@ -50,7 +50,27 @@ int main()
     }
 
     //The basic array prints after adding elements to subArray
-    //for (int i = 0; )
+    std::cout << "Basic array of sub array contains: " << std::endl;
+    for (int i = 0; i < subArray.size()-7; i++){
+        std::cout << sArray[i] << ", ";
+    }
+    std::cout << "\b\b" << std::endl << std::endl;
+
+    //The new elemets in subArray
+    std::cout << "Sub array with 7 elements added: " << std::endl;
+    for (int i = 0; i < subArray.size(); i++){
+        std::cout << subArray[i] << ", ";
+    }
+    std::cout << "\b\b" << std::endl << std::endl;
+
+    //original array
+    std::cout << "Original arraylist: " << std::endl;
+    for (int i = 0; i < array.size(); i++){
+        std::cout << array[i] << ", ";
+    }
+    std::cout << "\b\b" << std::endl << std::endl;
+
+    //Copy constructor & copy assignment
 
     return 0;
 }

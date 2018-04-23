@@ -119,6 +119,12 @@ private:
     int _reserved;  // The current capacity of "_elems" array
     int _size;      // The number of elements stored
     T* _elems;      // Array for soring the elements
+};
+
+template<class T>
+ArrayList<T>::ArrayList()
+{
+
 }
 
 #endif // ARRAYLIST_H

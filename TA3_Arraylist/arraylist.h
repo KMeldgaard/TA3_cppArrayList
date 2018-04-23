@@ -164,9 +164,20 @@ ArrayList<T>::operator =(ArrayList<T>&& a)
 }
 
 template<class T>
-ArrayList<T>::add(int idx, const T &element)
+void ArrayList<T>::add(int idx, const T &element)
 {
+    if (idx > _size) {
+        return;
+    }
+    if (_size == _reserved){
+        extendStorage();
+    }
 
+    for (unsigned int i = _size; i > idx; i--){ //shuffle right
+        _elems[i+1] = _elems[i];
+    }
+    _elems[idx] = element;
+    _size++;
 }
 
 template<class T>
@@ -182,27 +193,33 @@ ArrayList<T>::operator [](int idx)
 }
 
 template<class T>
-ArrayList<T>::remove(int idx)
+void ArrayList<T>::remove(int idx)
 {
-
+    if (idx > _size){
+        return;
+    }
+    for (unsigned int i = idx; i < _size; i++){ //shuffle right
+        _elems[i]=_elems[i+1];
+    }
+    _size--;
 }
 
 template<class T>
-ArrayList<T>::size()
+int ArrayList<T>::size()
 {
     return _size;
 }
 
 template<class T>
-ArrayList<T>::reserved()
+int ArrayList<T>::reserved()
 {
     return _reserved;
 }
 
 template<class T>
-ArrayList<T>::isEmpty()
+bool ArrayList<T>::isEmpty()
 {
-
+    return _size;
 }
 
 template<class T>
@@ -212,27 +229,38 @@ ArrayList<T>::trimToSize()
 }
 
 template<class T>
-ArrayList<T>::sort()
+void ArrayList<T>::sort()
 {
 
 }
 
 template<class T>
-ArrayList<T>::subArrayList(int fromIdx, int toIdx) const
+ArrayList<T> ArrayList<T>::subArrayList(int fromIdx, int toIdx) const
 {
 
 }
 
 template<class T>
-ArrayList<T>::toArray()
+T* ArrayList<T>::toArray()
 {
+    T* res = T[_size];
+    for (unsigned int i = 0; i < _size; i++){
+        res[i] = _elems[i];
+    }
 
+    return res;
 }
 
 template<class T>
-ArrayList<T>::extendStorage()
+void ArrayList<T>::extendStorage()
 {
-
+    T* temp = new T[size * 2]; //make new array 2x larger
+    for (unsigned int i = 0; i < _size; i++){
+        _elems[i] = temp[i]; //copy values from elems to new array
+    }
+    _reserved *= 2;
+    delete [] _elems; //delete data at _elems
+    _elems = temp; //point _elems at new array
 }
 
 #endif // ARRAYLIST_H

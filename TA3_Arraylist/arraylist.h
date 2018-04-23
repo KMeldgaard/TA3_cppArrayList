@@ -160,7 +160,7 @@ ArrayList<T>::ArrayList(int initialized)
 template<class T>
 ArrayList<T>::~ArrayList()
 {
-
+    delete []_elems;
 }
 
 template<class T>

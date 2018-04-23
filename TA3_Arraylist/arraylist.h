@@ -152,7 +152,79 @@ ArrayList<T>::~ArrayList()
 }
 
 template<class T>
-ArrayList<T>::operator =(const ArrayList<T>& a)
+ArrayList<T>::operator=(const ArrayList<T>& a)
+{
+
+}
+
+template<class T>
+ArrayList<T>::operator =(ArrayList<T>&& a)
+{
+
+}
+
+template<class T>
+ArrayList<T>::add(int idx, const T &element)
+{
+
+}
+
+template<class T>
+ArrayList<T>::operator [](int idx) const
+{
+
+}
+
+template<class T>
+ArrayList<T>::operator [](int idx)
+{
+
+}
+
+template<class T>
+ArrayList<T>::remove(int idx)
+{
+
+}
+
+template<class T>
+ArrayList<T>::size()
+{
+
+}
+
+template<class T>
+ArrayList<T>::reserved()
+{
+
+}
+
+template<class T>
+ArrayList<T>::isEmpty()
+{
+
+}
+
+template<class T>
+ArrayList<T>::trimToSize()
+{
+
+}
+
+template<class T>
+ArrayList<T>::sort()
+{
+
+}
+
+template<class T>
+ArrayList<T>::subArrayList(int fromIdx, int toIdx) const
+{
+
+}
+
+template<class T>
+ArrayList<T>::toArray()
 {
 
 }

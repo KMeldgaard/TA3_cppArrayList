@@ -127,4 +127,16 @@ ArrayList<T>::ArrayList()
 
 }
 
+template<class T>
+ArrayList<T>::ArrayList(const ArrayList<T> &c)
+{
+
+}
+
+template<class T>
+ArrayList<T>::ArrayList(ArrayList<T> &&c)
+{
+
+}
+
 #endif // ARRAYLIST_H

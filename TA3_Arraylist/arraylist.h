@@ -246,13 +246,18 @@ int ArrayList<T>::reserved()
 template<class T>
 bool ArrayList<T>::isEmpty()
 {
-    return _size;
+    return !_size;
 }
 
 template<class T>
 ArrayList<T>::trimToSize()
 {
-
+    T* temp = new T[_size];
+    for (unsigned int i = 0; i < _size; i++){
+        temp[i] = _elems[i];
+    }
+    _elems = temp;
+    delete temp;
 }
 
 template<class T>

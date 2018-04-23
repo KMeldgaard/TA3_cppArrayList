@@ -58,7 +58,7 @@ public:
     /*
      * Get a reference to the element at idx
      */
-    T&operator [](int idx);
+    T& operator [](int idx);
 
     /*
      * Removes the element at placement "idx" by moving all the remaining elements
@@ -130,13 +130,25 @@ ArrayList<T>::ArrayList()
 template<class T>
 ArrayList<T>::ArrayList(const ArrayList<T> &c)
 {
-
+    _size = c.size();
+    _reserved = c.reserved();
+    _elems= new T [_reserved];
+    for (int i =0; i<_size;i++) {
+       _elems[i]=c[i];
+    }
 }
+
 
 template<class T>
 ArrayList<T>::ArrayList(ArrayList<T> &&c)
 {
+    _size = c.size();
+    _reserved = c.reserved();
+    _elems = c._elems;
 
+    c._size = 0;
+    c._reserved = 0;
+    c._elems = nullptr;
 }
 
 template<class T>
@@ -148,19 +160,34 @@ ArrayList<T>::ArrayList(int initialized)
 template<class T>
 ArrayList<T>::~ArrayList()
 {
-
+    delete []_elems;
 }
 
 template<class T>
 ArrayList<T>::operator=(const ArrayList<T>& a)
 {
-
+    if (this != a) {
+        delete [] _elems;
+        _elems = new T[a._size];
+        for (int i = 0; i < a._elems; i++)
+            _elems[i] = a._elems[i];
+        _size = a._size;
+    }
+    return *this;
 }
 
 template<class T>
-ArrayList<T>::operator =(ArrayList<T>&& a)
+ArrayList<T>::operator=(ArrayList<T>&& a)
 {
+    if (this != &a) {
+        delete [] _elems;
+        _elems = a._elems;
+        _size = a._size;
 
+        a._elems = nullptr;
+        a._size = 0;
+    }
+    return *this;
 }
 
 template<class T>
@@ -181,15 +208,15 @@ void ArrayList<T>::add(int idx, const T &element)
 }
 
 template<class T>
-ArrayList<T>::operator [](int idx) const
+T& ArrayList<T>::operator [](int idx) const
 {
-
+    return _elems[idx];
 }
 
 template<class T>
-ArrayList<T>::operator [](int idx)
+T& ArrayList<T>::operator [](int idx)
 {
-
+    return _elems[idx];
 }
 
 template<class T>

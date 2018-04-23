@@ -246,7 +246,7 @@ int ArrayList<T>::reserved()
 template<class T>
 bool ArrayList<T>::isEmpty()
 {
-    return _size;
+    return !_size;
 }
 
 template<class T>

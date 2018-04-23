@@ -139,4 +139,22 @@ ArrayList<T>::ArrayList(ArrayList<T> &&c)
 
 }
 
+template<class T>
+ArrayList<T>::ArrayList(int initialized)
+{
+
+}
+
+template<class T>
+ArrayList<T>::~ArrayList()
+{
+
+}
+
+template<class T>
+ArrayList<T>::operator =(const ArrayList<T>& a)
+{
+
+}
+
 #endif // ARRAYLIST_H

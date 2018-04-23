@@ -130,13 +130,25 @@ ArrayList<T>::ArrayList()
 template<class T>
 ArrayList<T>::ArrayList(const ArrayList<T> &c)
 {
-
+    _size = c.size();
+    _reserved = c.reserved();
+    _elems= new T [_reserved];
+        for (int i =0; i<_size;i++){
+           _elems[i]=c[i];
+        }
 }
+
 
 template<class T>
 ArrayList<T>::ArrayList(ArrayList<T> &&c)
 {
+    _size = c.size();
+    _reserved = c.reserved();
+    _elems = c._elems;
 
+    c._size = 0;
+    c._reserved = 0;
+    c._elems = nullptr;
 }
 
 template<class T>

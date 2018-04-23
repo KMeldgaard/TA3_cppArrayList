@@ -229,4 +229,10 @@ ArrayList<T>::toArray()
 
 }
 
+template<class T>
+ArrayList<T>::extendStorage()
+{
+
+}
+
 #endif // ARRAYLIST_H

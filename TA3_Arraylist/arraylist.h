@@ -130,11 +130,13 @@ ArrayList<T>::ArrayList()
 template<class T>
 ArrayList<T>::ArrayList(const ArrayList<T> &c)
 {
-    _size = c.size();
-    _reserved = c.reserved();
-    _elems= new T [_reserved];
-    for (int i =0; i<_size;i++) {
-       _elems[i]=c[i];
+    if (c._size > 0){
+        _size = c.size();
+        _reserved = c.reserved();
+        _elems= new T [_reserved];
+        for (int i =0; i<_size;i++) {
+           _elems[i]=c[i];
+        }
     }
 }
 
@@ -152,9 +154,11 @@ ArrayList<T>::ArrayList(ArrayList<T> &&c)
 }
 
 template<class T>
-ArrayList<T>::ArrayList(int initialized)
+ArrayList<T>::ArrayList(int initialized) //Is this right?
 {
-
+    _reserved = initialized;
+    _size = initialized;
+    _elems = new T[initialized];
 }
 
 template<class T>
@@ -166,7 +170,7 @@ ArrayList<T>::~ArrayList()
 template<class T>
 ArrayList<T>::operator=(const ArrayList<T>& a)
 {
-    if (this != a) {
+    if (this != a && a._size > 0) {
         delete [] _elems;
         _elems = new T[a._size];
         for (int i = 0; i < a._elems; i++)

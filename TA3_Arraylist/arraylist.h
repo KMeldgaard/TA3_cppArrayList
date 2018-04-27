@@ -70,7 +70,6 @@ public:
      * Returns the number of elements stored
      */
     int size() const;
-
     /*
      * Returns the number of items currently reserved in memory
      */
@@ -164,6 +163,8 @@ ArrayList<T>::ArrayList(int initialized) //Is this right?
 template<class T>
 ArrayList<T>::~ArrayList()
 {
+    _reserved = 0;
+    _size = 0;
     delete []_elems;
 }
 

@@ -30,6 +30,8 @@ public:
      */
     ArrayList<T>& operator=(ArrayList<T>&& a);
 
+    bool operator!=(const ArrayList<T>& a);
+
     /*
      * Add element to dynamic array
      */
@@ -122,7 +124,9 @@ private:
 
 template<class T>
 ArrayList<T>::ArrayList(){
-
+    _elems = new T[1];
+    _size = 1;
+    _reserved = 1;
 }
 
 template<class T>
@@ -164,11 +168,11 @@ ArrayList<T>::~ArrayList(){
 }
 
 template<class T>
-ArrayList<T>::operator=(const ArrayList<T>& a){
-    if (this != a && a._size > 0) {
+ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& a){
+    if (a._size > 0) {
         delete [] _elems;
         _elems = new T[a._size];
-        for (int i = 0; i < a._elems; i++)
+        for (int i = 0; i < a._size; i++)
             _elems[i] = a._elems[i];
         _size = a._size;
     }
@@ -176,7 +180,7 @@ ArrayList<T>::operator=(const ArrayList<T>& a){
 }
 
 template<class T>
-ArrayList<T>::operator=(ArrayList<T>&& a){
+ArrayList<T>& ArrayList<T>::operator=(ArrayList<T>&& a) {
     if (this != &a) {
         delete [] _elems;
         _elems = a._elems;
@@ -189,7 +193,15 @@ ArrayList<T>::operator=(ArrayList<T>&& a){
 }
 
 template<class T>
-void ArrayList<T>::add(int idx, const T &element){
+bool ArrayList<T>::operator !=(const ArrayList<T>& a) {
+    if (a._size == _size && a._reserved == _reserved && &a._elems == &_elems) {
+        return false;
+    } else
+        return true;
+}
+
+template<class T>
+void ArrayList<T>::add(int idx, const T &element) {
     if (idx > _size) {
         return;
     }
@@ -205,7 +217,7 @@ void ArrayList<T>::add(int idx, const T &element){
 }
 
 template<class T>
-T& ArrayList<T>::operator [](int idx) const{
+const T& ArrayList<T>::operator [](int idx) const{
     return _elems[idx];
 }
 
@@ -226,22 +238,22 @@ void ArrayList<T>::remove(int idx){
 }
 
 template<class T>
-int ArrayList<T>::size(){
+int ArrayList<T>::size() const {
     return _size;
 }
 
 template<class T>
-int ArrayList<T>::reserved(){
+int ArrayList<T>::reserved() const {
     return _reserved;
 }
 
 template<class T>
-bool ArrayList<T>::isEmpty(){
+bool ArrayList<T>::isEmpty() const {
     return !_size;
 }
 
 template<class T>
-ArrayList<T>::trimToSize(){
+void ArrayList<T>::trimToSize() {
     T* temp = new T[_size];
     for (unsigned int i = 0; i < _size; i++){
         temp[i] = _elems[i];
@@ -251,14 +263,14 @@ ArrayList<T>::trimToSize(){
 }
 
 template<class T>
-void ArrayList<T>::sort(){
+void ArrayList<T>::sort() {
     int i, j, elem;
     for (i = 1; i < _size; i++) {
         elem = _elems[i];
         j = i - 1;
 
         while (j >= 0 && j > elem) {
-            _elems[j + 1] = elem[j];
+            _elems[j + 1] = _elems[j];
             j--;
         }
         _elems[j] = elem;
@@ -276,7 +288,7 @@ ArrayList<T> ArrayList<T>::subArrayList(int fromIdx, int toIdx) const{
 
 template<class T>
 T* ArrayList<T>::toArray(){
-    T* res = T[_size];
+    T* res = new T[_size];
     for (unsigned int i = 0; i < _size; i++){
         res[i] = _elems[i];
     }
@@ -286,7 +298,7 @@ T* ArrayList<T>::toArray(){
 
 template<class T>
 void ArrayList<T>::extendStorage(){
-    T* temp = new T[size * 2]; //make new array 2x larger
+    T* temp = new T[_size * 2]; //make new array 2x larger
     for (unsigned int i = 0; i < _size; i++){
         _elems[i] = temp[i]; //copy values from elems to new array
     }

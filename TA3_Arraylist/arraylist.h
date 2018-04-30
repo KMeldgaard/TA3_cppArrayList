@@ -70,7 +70,6 @@ public:
      * Returns the number of elements stored
      */
     int size() const;
-
     /*
      * Returns the number of items currently reserved in memory
      */
@@ -122,26 +121,25 @@ private:
 };
 
 template<class T>
-ArrayList<T>::ArrayList()
-{
+ArrayList<T>::ArrayList(){
 
 }
 
 template<class T>
-ArrayList<T>::ArrayList(const ArrayList<T> &c)
-{
-    _size = c.size();
-    _reserved = c.reserved();
-    _elems= new T [_reserved];
-    for (int i =0; i<_size;i++) {
-       _elems[i]=c[i];
+ArrayList<T>::ArrayList(const ArrayList<T> &c){
+    if (c._size > 0){
+        _size = c.size();
+        _reserved = c.reserved();
+        _elems= new T [_reserved];
+        for (int i =0; i<_size;i++) {
+           _elems[i]=c[i];
+        }
     }
 }
 
 
 template<class T>
-ArrayList<T>::ArrayList(ArrayList<T> &&c)
-{
+ArrayList<T>::ArrayList(ArrayList<T> &&c){
     _size = c.size();
     _reserved = c.reserved();
     _elems = c._elems;
@@ -152,21 +150,22 @@ ArrayList<T>::ArrayList(ArrayList<T> &&c)
 }
 
 template<class T>
-ArrayList<T>::ArrayList(int initialized)
-{
-
+ArrayList<T>::ArrayList(int initialized) //Is this right?{
+    _reserved = initialized;
+    _size = initialized;
+    _elems = new T[initialized];
 }
 
 template<class T>
-ArrayList<T>::~ArrayList()
-{
+ArrayList<T>::~ArrayList(){
+    _reserved = 0;
+    _size = 0;
     delete []_elems;
 }
 
 template<class T>
-ArrayList<T>::operator=(const ArrayList<T>& a)
-{
-    if (this != a) {
+ArrayList<T>::operator=(const ArrayList<T>& a){
+    if (this != a && a._size > 0) {
         delete [] _elems;
         _elems = new T[a._size];
         for (int i = 0; i < a._elems; i++)
@@ -177,8 +176,7 @@ ArrayList<T>::operator=(const ArrayList<T>& a)
 }
 
 template<class T>
-ArrayList<T>::operator=(ArrayList<T>&& a)
-{
+ArrayList<T>::operator=(ArrayList<T>&& a){
     if (this != &a) {
         delete [] _elems;
         _elems = a._elems;
@@ -191,8 +189,7 @@ ArrayList<T>::operator=(ArrayList<T>&& a)
 }
 
 template<class T>
-void ArrayList<T>::add(int idx, const T &element)
-{
+void ArrayList<T>::add(int idx, const T &element){
     if (idx > _size) {
         return;
     }
@@ -208,20 +205,17 @@ void ArrayList<T>::add(int idx, const T &element)
 }
 
 template<class T>
-T& ArrayList<T>::operator [](int idx) const
-{
+T& ArrayList<T>::operator [](int idx) const{
     return _elems[idx];
 }
 
 template<class T>
-T& ArrayList<T>::operator [](int idx)
-{
+T& ArrayList<T>::operator [](int idx){
     return _elems[idx];
 }
 
 template<class T>
-void ArrayList<T>::remove(int idx)
-{
+void ArrayList<T>::remove(int idx){
     if (idx > _size){
         return;
     }
@@ -232,26 +226,22 @@ void ArrayList<T>::remove(int idx)
 }
 
 template<class T>
-int ArrayList<T>::size()
-{
+int ArrayList<T>::size(){
     return _size;
 }
 
 template<class T>
-int ArrayList<T>::reserved()
-{
+int ArrayList<T>::reserved(){
     return _reserved;
 }
 
 template<class T>
-bool ArrayList<T>::isEmpty()
-{
+bool ArrayList<T>::isEmpty(){
     return !_size;
 }
 
 template<class T>
-ArrayList<T>::trimToSize()
-{
+ArrayList<T>::trimToSize(){
     T* temp = new T[_size];
     for (unsigned int i = 0; i < _size; i++){
         temp[i] = _elems[i];
@@ -261,20 +251,17 @@ ArrayList<T>::trimToSize()
 }
 
 template<class T>
-void ArrayList<T>::sort()
-{
+void ArrayList<T>::sort(){
 
 }
 
 template<class T>
-ArrayList<T> ArrayList<T>::subArrayList(int fromIdx, int toIdx) const
-{
+ArrayList<T> ArrayList<T>::subArrayList(int fromIdx, int toIdx) const{
 
 }
 
 template<class T>
-T* ArrayList<T>::toArray()
-{
+T* ArrayList<T>::toArray(){
     T* res = T[_size];
     for (unsigned int i = 0; i < _size; i++){
         res[i] = _elems[i];
@@ -284,15 +271,14 @@ T* ArrayList<T>::toArray()
 }
 
 template<class T>
-void ArrayList<T>::extendStorage()
-{
+void ArrayList<T>::extendStorage(){
     T* temp = new T[size * 2]; //make new array 2x larger
     for (unsigned int i = 0; i < _size; i++){
         _elems[i] = temp[i]; //copy values from elems to new array
     }
     _reserved *= 2;
-    delete [] _elems; //delete data at _elems
     _elems = temp; //point _elems at new array
+    delete temp;
 }
 
 #endif // ARRAYLIST_H

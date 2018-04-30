@@ -151,11 +151,7 @@ ArrayList<T>::ArrayList(ArrayList<T> &&c){
 }
 
 template<class T>
-<<<<<<< HEAD
-ArrayList<T>::ArrayList(int initialized) {  //Is this right?{
-=======
-ArrayList<T>::ArrayList(int initialized){ //Is this right?
->>>>>>> 2836f9701aad6ab38c631ea548b0d267e554c9f2
+ArrayList<T>::ArrayList(int initialized) {  //Is this right?
     _reserved = initialized;
     _size = initialized;
     _elems = new T[initialized];
@@ -257,7 +253,17 @@ ArrayList<T>::trimToSize(){
 
 template<class T>
 void ArrayList<T>::sort(){
+    int i, j, elem;
+    for (i = 1; i < _size; i++) {
+        elem = _elems[i];
+        j = i - 1;
 
+        while (j >= 0 && j > elem) {
+            _elems[j + 1] = elem[j];
+            j--;
+        }
+        _elems[j] = elem;
+    }
 }
 
 template<class T>

@@ -30,6 +30,7 @@ public:
      */
     ArrayList<T>& operator=(ArrayList<T>&& a);
 
+
     /*
      * Add element to dynamic array
      */

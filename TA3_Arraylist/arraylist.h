@@ -150,7 +150,7 @@ ArrayList<T>::ArrayList(ArrayList<T> &&c){
 }
 
 template<class T>
-ArrayList<T>::ArrayList(int initialized) //Is this right?{
+ArrayList<T>::ArrayList(int initialized) {  //Is this right?{
     _reserved = initialized;
     _size = initialized;
     _elems = new T[initialized];

@@ -30,7 +30,10 @@ public:
      */
     ArrayList<T>& operator=(ArrayList<T>&& a);
 
+<<<<<<< HEAD
     bool operator!=(const ArrayList<T>& a);
+=======
+>>>>>>> bb6965b301a69ac782c177706550c0419be9e457
 
     /*
      * Add element to dynamic array

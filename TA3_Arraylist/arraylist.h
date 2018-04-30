@@ -279,10 +279,17 @@ void ArrayList<T>::sort() {
     }
 }
 
+
 template<class T>
 ArrayList<T> ArrayList<T>::subArrayList(int fromIdx, int toIdx) const{
-    if (fromIdx < 0 || fromIdx > _size || toIdx < 0 || toIdx > _size){
-        ArrayList<T> res = ArrayList<T>();
+    if (fromIdx < 0 || fromIdx > _size || toIdx < 0 || toIdx > _size || fromIdx > toIdx){
+        ArrayList<T> res();
+        return res;
+    } else {
+        ArrayList<T> res(toIdx - fromIdx);
+        for (int i = fromIdx; i <= toIdx; i++ ){
+            res[i] = _elems[i];
+        }
         return res;
     }
 
@@ -296,6 +303,7 @@ T* ArrayList<T>::toArray(){
     }
 
     return res;
+
 }
 
 template<class T>

@@ -6,7 +6,8 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    std::system("color 0A"); //Matrix color theme
+    std::cout << "-----ArrayList implementation - TA3------" << std::endl;
 
     ArrayList<double> array;
 

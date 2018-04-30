@@ -150,7 +150,7 @@ ArrayList<T>::ArrayList(ArrayList<T> &&c){
 }
 
 template<class T>
-ArrayList<T>::ArrayList(int initialized) //Is this right?{
+ArrayList<T>::ArrayList(int initialized){ //Is this right?
     _reserved = initialized;
     _size = initialized;
     _elems = new T[initialized];
@@ -257,6 +257,10 @@ void ArrayList<T>::sort(){
 
 template<class T>
 ArrayList<T> ArrayList<T>::subArrayList(int fromIdx, int toIdx) const{
+    if (fromIdx < 0 || fromIdx > _size || toIdx < 0 || toIdx > _size){
+        ArrayList<T> res = ArrayList<T>();
+        return res;
+    }
 
 }
 

@@ -30,10 +30,9 @@ public:
      */
     ArrayList<T>& operator=(ArrayList<T>&& a);
 
-<<<<<<< HEAD
+
     bool operator!=(const ArrayList<T>& a);
-=======
->>>>>>> bb6965b301a69ac782c177706550c0419be9e457
+
 
     /*
      * Add element to dynamic array
@@ -303,7 +302,7 @@ template<class T>
 void ArrayList<T>::extendStorage(){
     T* temp = new T[_size * 2]; //make new array 2x larger
     for (unsigned int i = 0; i < _size; i++){
-        _elems[i] = temp[i]; //copy values from elems to new array
+        temp[i] = _elems[i]; //copy values from elems to new array
     }
     _reserved *= 2;
     _elems = temp; //point _elems at new array

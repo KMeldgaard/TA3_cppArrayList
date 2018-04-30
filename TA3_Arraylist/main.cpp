@@ -104,5 +104,23 @@ int main()
     }
     std::cout << "\b\b  " << std::endl << std::endl;
 
+    subArray3.sort();
+
+    std::cout << "Sorting subArray3..." << std::endl;
+    std::cout << "subArray3 = ";
+    for (int i = 0; i < subArray3.size(); ++i) {
+        std::cout << subArray3[i] << ", ";
+    }
+
+    std::cout << "\b\b  " << std::endl << std::endl;
+
+    std::cout << "Sorting array..." << std::endl;
+    array.sort();
+    std::cout << "array2 = ";
+    for (int i = 0; i < array.size(); i++) {
+        std::cout << array[i] << ", ";
+    }
+    std::cout << "\b\b  " << std::endl << std::endl;
+
     return 0;
 }

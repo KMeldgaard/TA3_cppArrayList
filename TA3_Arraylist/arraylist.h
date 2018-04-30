@@ -1,6 +1,8 @@
 #ifndef ARRAYLIST_H
 #define ARRAYLIST_H
 
+#include <iostream>
+
 template <typename T>
 class ArrayList
 {
@@ -133,6 +135,7 @@ ArrayList<T>::ArrayList(){
 
 template<class T>
 ArrayList<T>::ArrayList(const ArrayList<T> &c){
+    std::cout << "Copy constructor" << std::endl;
     if (c._size > 0){
         _size = c.size();
         _reserved = c.reserved();
@@ -146,6 +149,7 @@ ArrayList<T>::ArrayList(const ArrayList<T> &c){
 
 template<class T>
 ArrayList<T>::ArrayList(ArrayList<T> &&c){
+    std::cout << "Move constructor" << std::endl;
     _size = c.size();
     _reserved = c.reserved();
     _elems = c._elems;
@@ -171,6 +175,7 @@ ArrayList<T>::~ArrayList(){
 
 template<class T>
 ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& a){
+    std::cout << "Copy assignment" << std::endl;
     if (a._size > 0) {
         delete [] _elems;
         _elems = new T[a._size];
@@ -183,6 +188,7 @@ ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& a){
 
 template<class T>
 ArrayList<T>& ArrayList<T>::operator=(ArrayList<T>&& a) {
+    std::cout << "Move assignment" << std::endl;
     if (this != &a) {
         delete [] _elems;
         _elems = a._elems;
@@ -233,7 +239,7 @@ void ArrayList<T>::remove(int idx){
     if (idx > _size){
         return;
     }
-    for (unsigned int i = idx; i < _size; i++){ //shuffle right
+    for (unsigned int i = idx; i < _size; i++){ //shuffle left
         _elems[i]=_elems[i+1];
     }
     _size--;
@@ -261,21 +267,25 @@ void ArrayList<T>::trimToSize() {
         temp[i] = _elems[i];
     }
     _elems = temp;
+    _reserved = _size;
     delete temp;
 }
 
 template<class T>
 void ArrayList<T>::sort() {
-    int i, j, elem;
+    int i, j;
+    T elem, prev;
     for (i = 1; i < _size; i++) {
         elem = _elems[i];
         j = i - 1;
+        prev = _elems[j];
 
-        while (j >= 0 && j > elem) {
+        while (j >= 0 && prev > elem) {
             _elems[j + 1] = _elems[j];
             j--;
+            prev = _elems[j];
         }
-        _elems[j] = elem;
+        _elems[j+1] = elem;
     }
 }
 

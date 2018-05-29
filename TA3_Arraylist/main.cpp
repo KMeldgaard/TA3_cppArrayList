@@ -4,6 +4,10 @@
 
 using namespace std;
 
+//i copyconstructor: hvis size = 0, så virker den ikke korrekt og intet initialiseres.
+
+//﻿﻿i destructor behøver i ikke sætte _size = 0 (og reserved).
+
 int main()
 {
     std::system("color 0A"); //Matrix color theme

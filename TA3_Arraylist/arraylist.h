@@ -133,6 +133,7 @@ ArrayList<T>::ArrayList(){
     _reserved = 1;
 }
 
+/*i copyconstructor: hvis size = 0, så virker den ikke korrekt og intet initialiseres.*/
 template<class T>
 ArrayList<T>::ArrayList(const ArrayList<T> &c){
     std::cout << "Copy constructor" << std::endl;
@@ -140,7 +141,7 @@ ArrayList<T>::ArrayList(const ArrayList<T> &c){
         _size = c.size();
         _reserved = c.reserved();
         _elems= new T [_reserved];
-        for (int i =0; i<_size;i++) {
+        for (int i = 0; i<_size;i++) {
            _elems[i]=c[i];
         }
     }
@@ -166,10 +167,11 @@ ArrayList<T>::ArrayList(int initialized) {  //Is this right?
     _elems = new T[initialized];
 }
 
+/*﻿i destructor behøver i ikke sætte _size = 0 (og reserved).*/
 template<class T>
 ArrayList<T>::~ArrayList(){
-    _reserved = 0;
-    _size = 0;
+    _reserved = 0;  //ikke en pointer
+    _size = 0;      //ikke en pointer
     delete []_elems;
 }
 
